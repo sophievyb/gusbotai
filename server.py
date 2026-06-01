@@ -16,8 +16,8 @@ from urllib.parse import parse_qs, urlparse
 
 
 BASE_DIR = Path(__file__).resolve().parent
-STATIC_DIR = BASE_DIR / "static"
-DB_PATH = BASE_DIR / "data.sqlite3"
+STATIC_DIR = BASE_DIR / "static" if (BASE_DIR / "static").exists() else BASE_DIR
+DB_PATH = Path(__import__("os").environ.get("APP_DB_PATH", str(BASE_DIR / "data.sqlite3")))
 
 REGION_STATUSES = {"yes", "no", "partial", "unknown"}
 CHECK_STATUSES = {"works", "fails", "partial", "unknown", "manual"}
@@ -617,8 +617,8 @@ def run(host: str = "127.0.0.1", port: int = 8765) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="AI Service Registry web server")
-    parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--host", default="0.0.0.0")
+    parser.add_argument("--port", type=int, default=int(__import__("os").environ.get("PORT", "8765")))
     return parser.parse_args()
 
 

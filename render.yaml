@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: gusbotai
+    runtime: python
+    plan: starter
+    buildCommand: "true"
+    startCommand: python server.py
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: APP_DB_PATH
+        value: /var/data/data.sqlite3
+    disk:
+      name: app-data
+      mountPath: /var/data
+      sizeGB: 1
