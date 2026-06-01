@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Service Registry</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">AI</div>
+          <div>
+            <p class="eyebrow">Service Registry</p>
+            <h1>Проверка актуальности сервисов</h1>
+          </div>
+        </div>
+
+        <div class="panel search-panel">
+          <label for="searchInput">Поиск по сервисам</label>
+          <input id="searchInput" placeholder="ChatGPT, Canva, Photopea..." />
+          <button id="searchButton" class="primary">Найти</button>
+        </div>
+
+        <div class="panel">
+          <div class="mini-stat">
+            <span>API для приложения</span>
+            <code>GET /api/check?service=ChatGPT&region=RF</code>
+          </div>
+          <div class="mini-stat">
+            <span>Автообновление</span>
+            <strong>Ежедневно</strong>
+          </div>
+          <div class="mini-stat">
+            <span>База</span>
+            <strong>SQLite</strong>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <section class="hero panel">
+          <div>
+            <p class="section-label">Внутренняя панель</p>
+            <h2>Храните статус по РФ и РБ, а приложение получает готовый bot-reply</h2>
+            <p class="lead">
+              Панель разделяет официальную поддержку, открытие сайта, вход, post-login
+              проверку, бесплатность и необходимость VPN.
+            </p>
+          </div>
+          <div class="hero-grid">
+            <div class="hero-card accent">
+              <span>Статусы</span>
+              <strong>works / partial / vpn_required</strong>
+            </div>
+            <div class="hero-card">
+              <span>Поля карточки</span>
+              <strong>RF, RB, login, post-login, alternatives</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel table-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-label">Сервисы</p>
+                <h3>Список карточек</h3>
+              </div>
+              <span id="serviceCount" class="chip">0 записей</span>
+            </div>
+            <div id="serviceList" class="service-list"></div>
+          </div>
+
+          <div class="panel form-panel">
+            <div class="panel-header">
+              <div>
+                <p class="section-label">Редактор</p>
+                <h3>Карточка сервиса</h3>
+              </div>
+              <button id="newButton" class="ghost">Новая карточка</button>
+            </div>
+
+            <form id="serviceForm" class="service-form">
+              <div class="field-grid two">
+                <label>Название<input name="name" required /></label>
+                <label>URL<input name="url" type="url" required /></label>
+              </div>
+
+              <div class="field-grid three">
+                <label>Категория<input name="category" /></label>
+                <label>Последняя проверка<input name="last_checked" type="date" /></label>
+                <label>Ответственный<input name="owner" /></label>
+              </div>
+
+              <div class="field-grid two">
+                <label>Auto refresh<input name="refresh_enabled" value="yes" /></label>
+                <label>Status URL<input name="status_url" type="url" /></label>
+              </div>
+
+              <div class="field-grid three">
+                <label>РФ без VPN
+                  <select name="rf_without_vpn"></select>
+                </label>
+                <label>РБ без VPN
+                  <select name="rb_without_vpn"></select>
+                </label>
+                <label>Bot status
+                  <select name="bot_status"></select>
+                </label>
+              </div>
+
+              <div class="field-grid three">
+                <label>Регистрация<select name="registration"></select></label>
+                <label>Вход<select name="login"></select></label>
+                <label>Post-login<select name="post_login"></select></label>
+              </div>
+
+              <div class="field-grid three">
+                <label>Free tier<select name="free_tier"></select></label>
+                <label>Телефон<input name="phone_required" /></label>
+                <label>Карта<input name="card_required" /></label>
+              </div>
+
+              <div class="field-grid two">
+                <label>VPN required<input name="vpn_required" /></label>
+                <label>Official support (через запятую)<input name="official_support" /></label>
+              </div>
+
+              <label>Источники проверки (через запятую)<input name="sources" /></label>
+              <label>Аналоги (через запятую)<input name="alternatives" /></label>
+              <label>Комментарий для ответа<textarea name="response_comment" rows="4"></textarea></label>
+
+              <div class="actions">
+                <button class="primary" type="submit">Сохранить карточку</button>
+                <span id="saveStatus" class="status-text"></span>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="panel reply-panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Preview</p>
+              <h3>Готовый ответ для приложения</h3>
+            </div>
+            <div class="reply-toolbar">
+              <button id="refreshButton" class="ghost">Прогнать автообновление</button>
+              <div class="region-switch">
+                <button data-region="RF" class="region-button active">РФ</button>
+                <button data-region="RB" class="region-button">РБ</button>
+              </div>
+            </div>
+          </div>
+          <div id="autoRefreshMeta" class="auto-refresh-meta">Автопроверка пока не запускалась.</div>
+          <pre id="replyPreview" class="reply-box">Выберите сервис слева или создайте новую карточку.</pre>
+        </section>
+      </main>
+    </div>
+    <script src="/app.js" defer></script>
+  </body>
+  </html>
