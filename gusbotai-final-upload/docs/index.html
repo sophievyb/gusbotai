@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Гусь в архиве</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#">
+          <span class="brand-badge">🧠</span>
+          <span class="brand-name">Айтигенио</span>
+        </a>
+
+        <div class="topbar-actions">
+          <button class="top-button" type="button">Войти</button>
+          <button class="icon-button" type="button" aria-label="Открыть меню">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="left-rail">
+          <nav class="menu-card">
+            <button class="nav-item active" type="button">
+              <span class="nav-icon blue">📘</span>
+              <span>Справочник тренера</span>
+            </button>
+            <button class="nav-item" type="button">
+              <span class="nav-icon green">🧭</span>
+              <span>Направления</span>
+            </button>
+            <button class="nav-item" type="button">
+              <span class="nav-icon violet">📄</span>
+              <span>Оферта и документы</span>
+            </button>
+          </nav>
+
+          <section class="poster-card">
+            <div class="poster-scene">
+              <div class="lamp"></div>
+              <div class="crate-stack">
+                <span>МЕТОДИКА</span>
+                <span>СЕРВИСЫ</span>
+                <span>ПАМЯТКИ</span>
+              </div>
+              <div class="duck-hero">
+                <div class="duck-cap">ГУСЬ</div>
+                <div class="duck-face">🪿</div>
+                <div class="duck-book">
+                  <strong>АРХИВ</strong>
+                  <span>АЙТИГЕНИО</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <section class="chat-stage">
+          <div class="chat-card">
+            <div class="status-row">
+              <div class="status-pill">
+                <span class="status-dot"></span>
+                <span>Гусь в архиве. Готов ответить!</span>
+              </div>
+              <div class="support-pill">
+                <div class="support-avatar">🪿</div>
+                <div>
+                  <strong>Гусь техподдержки</strong>
+                  <span>всегда на страже</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chat-log">
+              <div class="message-row outgoing">
+                <div class="message bubble user-bubble">
+                  <p id="questionBubble">А эти нейросети актуальные? Работают ли в РФ и РБ? Нужен ли VPN?</p>
+                  <div class="bubble-meta">
+                    <span id="bubbleTime">11:24</span>
+                    <span>✓✓</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="assistant-panel">
+                <div class="assistant-avatar">🪿</div>
+                <div class="assistant-card">
+                  <h2>Га-га, я в архиве Айтигенио 🪿</h2>
+                  <p class="assistant-lead">
+                    Помогу быстро найти ответ по базе, источникам и школьным правилам.
+                    Вот что можно спросить у меня:
+                  </p>
+
+                  <div id="topicGrid" class="topic-grid"></div>
+
+                  <div class="truth-box">
+                    <span class="truth-icon">💡</span>
+                    <p>
+                      Если справки нет в базе — не буду придумывать. Скажу, куда идти дальше:
+                      к методисту, заведующему, админу или техподдержке. 🪿
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="answer-block">
+                <div class="answer-header">
+                  <span class="answer-chip">Ответ по базе</span>
+                  <span id="autoRefreshMeta" class="answer-meta">Загружаю данные…</span>
+                </div>
+                <div id="replyPreview" class="answer-card"></div>
+              </div>
+            </div>
+
+            <form id="askForm" class="composer">
+              <button class="attach-button" type="button" aria-label="Прикрепить">📎</button>
+              <input
+                id="searchInput"
+                name="query"
+                placeholder="Напиши свой вопрос гусю..."
+                autocomplete="off"
+              />
+              <div class="composer-actions">
+                <div class="region-switch">
+                  <button data-region="RF" class="region-button active" type="button">РФ</button>
+                  <button data-region="RB" class="region-button" type="button">РБ</button>
+                </div>
+                <button id="sendButton" class="send-button" type="submit" aria-label="Отправить">
+                  ➤
+                </button>
+              </div>
+            </form>
+
+            <footer class="chat-footer">
+              Гусь читает архивы, проверяет
+              <a id="dataEndpoint" href="./data/services.json" target="_blank" rel="noreferrer">источники</a>
+              и отвечает по делу 🪿
+            </footer>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js" defer></script>
+  </body>
+  </html>
